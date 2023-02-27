@@ -8,13 +8,18 @@
         </div>
         <p>We makes every day full of energy and taste</p>
         <p>Want to try our beans?</p>
-        <a href="#" class="btn">More</a>
+        <a @click="showModal" class="btn">More</a>
     </div>
 </template>
  
 <script>
+
     export default {
-        
+        props: {
+            showModal: {
+                type: Function
+            }
+        }
     }
 </script>
  

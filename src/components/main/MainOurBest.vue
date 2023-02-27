@@ -64,6 +64,7 @@
     font-weight: 700;
     color: #000000;
     padding: 10px 0 0 125px;
+    text-decoration: line-through;
 }
 .second-type{
     width: 220px;
