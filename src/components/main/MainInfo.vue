@@ -64,5 +64,6 @@
     color: #FFFFFF;
     text-decoration: none;
     margin: 18px 0 0 665px;
+    cursor: pointer;
 }
 </style>

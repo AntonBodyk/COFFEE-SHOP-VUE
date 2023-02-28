@@ -5,7 +5,9 @@
             <MainAboutUs></MainAboutUs>
             <MainOurBest></MainOurBest>
             <MainSales></MainSales>
-            <MainModal v-model:show="modalVisible"></MainModal>
+            <transition name="fade">
+                <MainModal v-model:show="modalVisible"></MainModal>
+            </transition>
         </div>
     </main>
 </template>
@@ -22,7 +24,7 @@ import MainModal  from './MainModal.vue';
         },
         data() {
             return {
-                modalVisible: false
+                modalVisible: false,
             }
         },
         methods: {
@@ -39,5 +41,12 @@ import MainModal  from './MainModal.vue';
         font-family: 'Merienda', cursive;
         text-align: center;
         margin-top: -400px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter-from, .fade-leave-to {
+        opacity: 0;
     }
 </style>

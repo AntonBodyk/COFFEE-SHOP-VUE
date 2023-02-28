@@ -7,16 +7,19 @@
                     <img src="../../assets/img/815O9ktyfUL.png" alt="">
                     <p>Solimo Coffee Beans 2 kg</p>
                     <span>10.73$</span>
+                    <div class="sales-price">9.00$</div>
                 </div>
                 <div class="second-type">
                     <img src="../../assets/img/91Ryk2gKejL.png" alt="">
                     <p>Presto Coffee Beans 1 kg</p>
                     <span>15.99$</span>
+                    <div class="sales-price">14.00$</div>
                 </div>
                 <div class="third-type">
                     <img src="../../assets/img/71qBQnpQFYL.png" alt="">
                     <p>AROMISTICO Coffee 1 kg</p>
                     <span>6.99$</span>
+                    <div class="sales-price">5.00$</div>
                 </div>
             </div>
         </div>
@@ -66,6 +69,12 @@
     padding: 10px 0 0 125px;
     text-decoration: line-through;
 }
+.sales-price{
+    font-size: 14px;
+    font-weight: 700;
+    color: red;
+    padding: 5px 0 0 125px;
+}
 .second-type{
     width: 220px;
     height: 240px;
@@ -86,6 +95,7 @@
     font-weight: 700;
     color: #000000;
     padding: 10px 0 0 125px;
+    text-decoration: line-through;
 }
 .third-type{
     width: 220px;
@@ -107,5 +117,6 @@
     font-weight: 700;
     color: #000000;
     padding: 10px 0 0 125px;
+    text-decoration: line-through;
 }
 </style>

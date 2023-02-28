@@ -16,60 +16,61 @@
  
 <script>
     export default {
-        props:{
-            show: {
-                type: Boolean,
-                default: false
-            }
+    props: {
+        show: {
+            type: Boolean,
+            default: false
         },
-        data() {
-            return{
-                form: {},
-                message: {
-                    loading: 'Загрузка...',
-                    success: 'Спасибо! Скоро мы с вами свяжемся',
-                    failure: 'Что-то пошло не так...'
-                }
-            }
-        },
-        methods: {
-            hideDialog() {
-                this.$emit('update:show', false);
-                document.body.style.overflow = '';
+    },
+    data() {
+        return {
+            form: {
+                name: "",
+                phone: ""
             },
-            async PostForm(e) {
-                e.preventDefault();
-
-                await fetch('assets/server.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(this.form)
-                })
-                .then(
-                    function(response, message) {
-                        console.log('Ответ сервера', response);
-                        const thanksModal = document.createElement('div');
-                        thanksModal.classList.add('modal__dialog');
-                        thanksModal.innerHTML = `
-                                <div class="modal__content">
-                                    <div class="modal__close" data-close>&times;</div>
-                                    <div class="modal__title">${message}</div>
-                                </div>
-                            `;
-                    }
-                )
-                .catch(
-                    function(error) {
-                        console.error(error);
-                    }
-                )
+            message: {
+                    loading: "Загрузка...",
+                    success: "Спасибо! Скоро мы с вами свяжемся",
+                    failure: "Что-то пошло не так..."
+                }
+        };
+    },
+    methods: {
+        hideDialog() {
+            this.$emit("update:show", false);
+            document.body.style.overflow = "";
+            
+        },
+        async PostForm(e) {
+            e.preventDefault();
+            await fetch("assets/server.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.form)
+            })
+                .then(function (response) {
+                    console.log( response);
+                    
+            })
+                .catch(function (error) {
+                    console.error(error);
+                
+            })
                 .finally(() => {
                     this.hideDialog();
-                })
-            }
-    }
+                    this.addPostModalBlock();
+                    this.form = {
+                        name: "",
+                        phone: ""
+                };
+            });
+        },
+        addPostModalBlock() {
+            
+        }
+    },
 }
 </script>
  
@@ -79,7 +80,6 @@
     top:0;
     left:0;
     z-index:1050;
-    
     width:100%;
     height:100%;
     overflow:hidden;
