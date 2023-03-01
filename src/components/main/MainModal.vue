@@ -43,6 +43,7 @@
         },
         async PostForm(e) {
             e.preventDefault();
+            if (this.form.name.length < 3 || this.form.name.replace(/[^+\d]/g, '') || this.form.phone.replace(/^(\+3|)[0-9]{10,11}$/)) return;
             await fetch("assets/server.php", {
                 method: "POST",
                 headers: {

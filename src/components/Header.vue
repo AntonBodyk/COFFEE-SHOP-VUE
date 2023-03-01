@@ -11,14 +11,20 @@
                         <li><a href="#">For your pleasure</a></li>
                     </ul>
                 </nav>
+                <div class="header-buttons">
+                    <fa icon="circle-user" class="fa-solid" @click="this.showRegistration"/>
+                    <fa icon="cart-shopping" class="fa-solid"/>
+                </div>
             </div>
         </header>
 </template>
  
 <script>
     export default {
-        data() {
-            return{}
+        props: {
+            showRegistration: {
+                type: Function
+            }
         }
     }
 </script>
@@ -54,5 +60,15 @@
     color: #FFFFFF;
     font-size: 12px;
     text-decoration: none;
+}
+.header-buttons{
+    display: flex;
+    margin: 50px 0 0 700px;
+}
+.fa-solid{
+    height: 25px;
+    color: #FFFFFF;
+    cursor: pointer;
+    margin-left: 20px;
 }
 </style>

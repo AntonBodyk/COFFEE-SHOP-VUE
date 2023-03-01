@@ -38,11 +38,9 @@ import MainModal  from './MainModal.vue';
  
 <style scoped>
     .main{
-        font-family: 'Merienda', cursive;
         text-align: center;
         margin-top: -400px;
     }
-
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
