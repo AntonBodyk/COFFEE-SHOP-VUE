@@ -6,7 +6,7 @@
                     <div @click="hideDialog" class="modal__close">&times;</div>
                     <div class="modal__title">Мы свяжемся с вами как можно быстрее!</div>
                     <input required v-model="form.name" placeholder="Ваше имя" name="name" type="text" class="modal__input">
-                    <input required v-model="form.phone" placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input">
+                    <input required v-model="form.phone" placeholder="Ваш номер телефона" name="phone" type="number" class="modal__input">
                     <button type="submit" class="btn btn_dark btn_min">Перезвонить мне</button>
                 </form>
             </div>
@@ -43,7 +43,7 @@
         },
         async PostForm(e) {
             e.preventDefault();
-            if (this.form.name.length < 3 || this.form.name.replace(/[^+\d]/g, '') || this.form.phone.replace(/^(\+3|)[0-9]{10,11}$/)) return;
+            if (this.form.name.length < 3 || this.form.name.replace(/[^+\d]/g, '')) return;
             await fetch("assets/server.php", {
                 method: "POST",
                 headers: {
@@ -61,15 +61,11 @@
             })
                 .finally(() => {
                     this.hideDialog();
-                    this.addPostModalBlock();
                     this.form = {
                         name: "",
                         phone: ""
                 };
             });
-        },
-        addPostModalBlock() {
-            
         }
     },
 }

@@ -2,11 +2,16 @@
     <div class="modal" v-if="show">
         <div class="modal__dialog">
             <div class="modal__content">
-                <form @submit="PostForm">
+                <form @submit="validationForm">
                     <div @click="hideRegistration" class="modal__close">&times;</div>
                     <div class="modal__title">Регистрация пользователя</div>
-                    <input required v-model="form.email" placeholder="Введите email" name="name" type="text" class="modal__input">
-                    <input required v-model="form.password" placeholder="Введите пароль" name="phone" type="phone" class="modal__input">
+                    <input required v-model="form.email" placeholder="Введите email" name="name" type="email" class="modal__input">
+                    <input required v-model="form.password" v-show="!showPassword" placeholder="Введите пароль" name="password" type="password" class="modal__input">
+                    <input required v-model="form.password" v-show="showPassword" placeholder="Введите пароль" name="password" type="text" class="modal__input">
+                    <div class="show-password">
+                        <input type="checkbox" @click="showPassword = !showPassword">
+                        <span>Показать пароль</span>
+                    </div>
                     <button type="submit" class="btn btn_dark btn_min">Зарегистрироваться</button>
                 </form>
             </div>
@@ -28,12 +33,40 @@
                     email: "",
                     password: ""
             },
+            showPassword: false
         }
         },
         methods: {
             hideRegistration() {
                 this.$emit("update:show", false);
                 document.body.style.overflow = "";
+        },
+           async validationForm(e) {
+                e.preventDefault();
+                if (this.form.password.length < 3) return;
+
+                await fetch("assets/server.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(this.form)
+            })
+                .then(function (response) {
+                    console.log( response);
+                    
+            })
+                .catch(function (error) {
+                    console.error(error);
+                
+            })
+                .finally(() => {
+                    this.hideRegistration();
+                    this.form = {
+                        email: "",
+                        password: ""
+                };
+            });
         }
     }
 }
@@ -95,6 +128,15 @@
     padding:0 20px;
     outline:0;
 }
+.show-password{
+    display: flex;
+    margin-left: 90px;
+}
+.show-password span{
+    color: grey;
+    font-size: 12px;
+    padding-left: 5px;
+}
 .btn{
     display:block;
     width:250px;
@@ -102,6 +144,7 @@
     border-radius: 5px;
     border: none;
     margin:0 auto;
+    margin-top: 15px;
     background-color: black;
     color: #fff;
     font-size:18px;
