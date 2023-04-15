@@ -3,7 +3,7 @@
         <div class="modal__dialog">
             <div class="modal__content">
                 <form @submit="PostForm">
-                    <div @click="hideDialog" class="modal__close">&times;</div>
+                    <div @click="hideModal" class="modal__close">&times;</div>
                     <div class="modal__title">Мы свяжемся с вами как можно быстрее!</div>
                     <input required v-model="form.name" placeholder="Ваше имя" name="name" type="text" class="modal__input">
                     <input required v-model="form.phone" placeholder="Ваш номер телефона" name="phone" type="number" class="modal__input">
@@ -15,13 +15,9 @@
 </template>
  
 <script>
+import modalMixin from '../mixins/modalMixin';
     export default {
-    props: {
-        show: {
-            type: Boolean,
-            default: false
-        },
-    },
+    mixins: [modalMixin],
     data() {
         return {
             form: {
@@ -36,11 +32,6 @@
         };
     },
     methods: {
-        hideDialog() {
-            this.$emit("update:show", false);
-            document.body.style.overflow = "";
-            
-        },
         async PostForm(e) {
             e.preventDefault();
             if (this.form.name.length < 3 || this.form.name.replace(/[^+\d]/g, '')) return;
@@ -60,7 +51,7 @@
                 
             })
                 .finally(() => {
-                    this.hideDialog();
+                    this.hideModal();
                     this.form = {
                         name: "",
                         phone: ""

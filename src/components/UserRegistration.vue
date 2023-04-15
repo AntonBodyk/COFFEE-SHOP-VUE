@@ -3,7 +3,7 @@
         <div class="modal__dialog">
             <div class="modal__content">
                 <form @submit="validationForm">
-                    <div @click="hideRegistration" class="modal__close">&times;</div>
+                    <div @click="hideModal" class="modal__close">&times;</div>
                     <div class="modal__title">Регистрация пользователя</div>
                     <input required v-model="form.email" placeholder="Введите email" name="name" type="email" class="modal__input">
                     <input required v-model="form.password" v-show="!showPassword" placeholder="Введите пароль" name="password" type="password" class="modal__input">
@@ -20,13 +20,10 @@
 </template>
  
 <script>
+import modalMixin from './mixins/modalMixin';
+
     export default {
-        props: {
-            show: {
-                type: Boolean,
-                default: false
-            }
-        },
+        mixins: [modalMixin],
         data(){
             return {
                 form: {
@@ -37,10 +34,6 @@
         }
         },
         methods: {
-            hideRegistration() {
-                this.$emit("update:show", false);
-                document.body.style.overflow = "";
-        },
            async validationForm(e) {
                 e.preventDefault();
                 if (this.form.password.length < 3) return;
@@ -61,7 +54,7 @@
                 
             })
                 .finally(() => {
-                    this.hideRegistration();
+                    this.hideModal();
                     this.form = {
                         email: "",
                         password: ""
